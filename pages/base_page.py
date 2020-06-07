@@ -1,5 +1,4 @@
 class BasePage(object):
-    pass
 
     def __init__(self, browser, url):
         self.browser = browser
