@@ -14,3 +14,7 @@ class ProductPageLocators(object):
     BASKET_NOTIFICATION = (By.CSS_SELECTOR, "#messages > .alert-info > div > p")
     PRODUCT = (By.CSS_SELECTOR, "#content_inner > article > div > div:nth-child(2) > h1")
     PRICE = (By.CSS_SELECTOR, "#content_inner > article > div > div:nth-child(2) > p")
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
