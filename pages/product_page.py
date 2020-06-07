@@ -14,10 +14,14 @@ class ProductPage(BasePage):
         return self.browser.find_element(*ProductPageLocators.PRICE).text
 
     def verify_product_notification(self, product):
-        assert product in self.browser.find_element(*ProductPageLocators.PRODUCT_NOTIFICATION).text, "Product is not present in the message"
+        message_expected = product + " has been added to your basket."
+        message_actual = self.browser.find_element(*ProductPageLocators.PRODUCT_NOTIFICATION).text
+        assert message_expected == message_actual, f"Incorrect product message:{message_actual}\nExpected:{message_expected}"
 
     def verify_basket_notification(self, price):
-        assert price in self.browser.find_element(*ProductPageLocators.BASKET_NOTIFICATION).text, f"Product is not considered in the basket price"
+        message_expected = "Your basket total is now " + price
+        message_actual = self.browser.find_element(*ProductPageLocators.BASKET_NOTIFICATION).text
+        assert message_expected == message_actual, f"Incorrect basket message:{message_actual}\nExpected:{message_expected}"
 
     def verify_item_adding(self, product, price):
         self.verify_product_notification(product)
