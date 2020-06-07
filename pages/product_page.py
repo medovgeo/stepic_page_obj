@@ -26,3 +26,13 @@ class ProductPage(BasePage):
     def verify_item_adding(self, product, price):
         self.verify_product_notification(product)
         self.verify_basket_notification(price)
+
+    def success_message_is_not_present(self):
+        assert self.is_not_element_present(*ProductPageLocators.PRODUCT_NOTIFICATION), "Success message is present! Not expected"
+
+    def success_message_is_dissapeared(self):
+        assert self.is_disappeared(*ProductPageLocators.PRODUCT_NOTIFICATION), "Success message is present! Expected to dissapear"
+
+
+
+
