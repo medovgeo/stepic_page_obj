@@ -1,6 +1,7 @@
 from pages.product_page import ProductPage
 from pages.login_page import LoginPage
 import pytest
+from mimesis import Person
 
 product_base_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
 urls = [f"{product_base_link}/?promo=offer{no}" for no in range(10) if no != 7]
@@ -63,3 +64,29 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page.basket_is_empty()
     page.basket_message_is_present()
 
+
+class TestUserAddToBasketFromProductPage:
+
+    @pytest.fixture(scope='function', autouse=True)
+    def setup(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/'
+        page = LoginPage(browser, link)
+        page.open()
+        user = Person()
+        email = user.email()
+        password = user.password(length=9)
+        page.register_new_user(email, password)
+        page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        page = ProductPage(browser, product_base_link)
+        page.open()
+        page.success_message_is_not_present()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        page = ProductPage(browser, product_base_link)
+        page.open()
+        product = page.product_name()
+        price = page.product_price()
+        page.add_to_basket()
+        page.verify_item_adding(product, price)
