@@ -16,13 +16,16 @@ class LoginPageLocators(object):
 
 class ProductPageLocators(object):
     ADD_TO_BASKET_BUTTON = (By.CSS_SELECTOR, "#add_to_basket_form > button")
-    PRODUCT_NOTIFICATION = (By.CSS_SELECTOR, "#messages > div > div")
-    BASKET_NOTIFICATION = (By.CSS_SELECTOR, "#messages > .alert-info > div > p")
     PRODUCT = (By.CSS_SELECTOR, "#content_inner > article > div > div:nth-child(2) > h1")
     PRICE = (By.CSS_SELECTOR, "#content_inner > article > div > div:nth-child(2) > p")
 
 
-class BasePageLocators():
+class BasketPageLocators(object):
+    PRODUCT_NOTIFICATION = (By.CSS_SELECTOR, "#messages > div > div")
+    BASKET_NOTIFICATION = (By.CSS_SELECTOR, "#messages > .alert-info > div > p")
+
+
+class BasePageLocators(object):
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
     BASKET_BUTTON = ((By.CSS_SELECTOR, ".btn.btn-default[href$='basket/']"))
